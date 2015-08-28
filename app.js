@@ -1,43 +1,70 @@
-var app = angular.module('plunker', []);
+var app = angular.module('plunker', ['ngRoute']);
 app.constant('VERSION', 1.1);
-app.controller('MainCtrl', function($scope) {
+app.config(['$routeProvider', function ($routeProvider)
+{
+  $routeProvider.when('/', {
+    templateUrl : 'home.html',
+    controller: 'MainCtrl'
+  })
+      .when('/newMeal',
+      {
+        templateUrl: 'newMeal.html',
+        controller: 'MainCtrl'
+
+      })
+      .when('/myEarnings',
+      {
+        templateUrl: 'myEarnings.html',
+        controller: 'MainCtrl'
+
+      })
+      .otherwise({templateUrl: 'home.html',
+        controller: 'MainCtrl'});
+
+}])
+app.controller('MainCtrl', function($rootScope, $scope) {
   
   //customer charge values
-  $scope.subtotal = 0;
-  $scope.tipCash = 0;
-  $scope.totalBill = 0;
+  $rootScope.values = $rootScope.values || {};
+  $rootScope.values.taxRate = $rootScope.values.taxRate || 0;
+  $rootScope.values.mealPrice = $rootScope.values.mealPrice || 0;
+  $rootScope.values.tipPercent = $rootScope.values.tipPercent || 0;
+
+  $rootScope.values.subtotal = $rootScope.values.subtotal || 0;
+  $rootScope.values.tipCash = $rootScope.values.tipCash || 0;
+  $rootScope.values.totalBill =$rootScope.values.totalBill || 0;
   
   //my earnings info
-  $scope.tipTotal = 0;
-  $scope.mealCount = 0;
-  $scope.avgTip = 0;
+  $rootScope.values.tipTotal = $rootScope.values.tipTotal || 0;
+  $rootScope.values.mealCount = $rootScope.values.mealCount || 0;
+  $rootScope.values.avgTip = $rootScope.values.avgTip || 0;
   
   $scope.submitForm = function ()
   {
-    if (isNaN($scope.mealPrice) || isNaN($scope.taxRate) || isNaN($scope.tipPercent))
+    if (isNaN($rootScope.values.mealPrice) || isNaN($rootScope.values.taxRate) || isNaN($rootScope.values.tipPercent))
     {
-      $scope.errMessage = "Please make sure all 3 values are numbers."
+      $rootScope.values.errMessage = "Please make sure all 3 values are numbers."
       return;
     }
     
-    $scope.subtotal = $scope.mealPrice * (1 + $scope.taxRate / 100);
-    $scope.tipCash = $scope.subtotal * ($scope.tipPercent / 100);
-    $scope.totalBill = $scope.subtotal + $scope.tipCash;
+    $rootScope.values.subtotal = $rootScope.values.mealPrice * (1 + $rootScope.values.taxRate / 100);
+    $rootScope.values.tipCash = $rootScope.values.subtotal * ($rootScope.values.tipPercent / 100);
+    $rootScope.values.totalBill = $rootScope.values.subtotal + $rootScope.values.tipCash;
     
-    $scope.mealCount ++;
-    $scope.tipTotal += $scope.tipCash;
-    $scope.avgTip = ($scope.tipTotal / $scope.mealCount) || 0;
+    $rootScope.values.mealCount ++;
+    $rootScope.values.tipTotal += $rootScope.values.tipCash;
+    $rootScope.values.avgTip = ($rootScope.values.tipTotal / $rootScope.values.mealCount) || 0;
     
-     $scope.errMessage = "";
+     $rootScope.values.errMessage = "";
     
-   // $scope.clearForm();
+   // $rootScope.values.clearForm();
     
   }
   $scope.clearMeal = function ()
   {
-    $scope.mealPrice = undefined;
-    $scope.taxRate = undefined;
-    $scope.tipPercent = undefined;
+    $rootScope.values.mealPrice = undefined;
+    $rootScope.values.taxRate = undefined;
+    $rootScope.values.tipPercent = undefined;
    
     
     
@@ -46,14 +73,14 @@ app.controller('MainCtrl', function($scope) {
   {
     $scope.clearMeal()
     
-     $scope.subtotal = 0;
-  $scope.tipCash = 0;
-  $scope.totalBill = 0;
+     $rootScope.values.subtotal = 0;
+  $rootScope.values.tipCash = 0;
+  $rootScope.values.totalBill = 0;
   
   //my earnings info
-  $scope.tipTotal = 0;
-  $scope.mealCount = 0;
-  $scope.avgTip = 0;
+  $rootScope.values.tipTotal = 0;
+  $rootScope.values.mealCount = 0;
+  $rootScope.values.avgTip = 0;
     
   }
 });

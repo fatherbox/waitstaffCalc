@@ -8,54 +8,30 @@
    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script data-require="angular.js@1.3.x" src="https://code.angularjs.org/1.3.17/angular.js" data-semver="1.3.17"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.js"></script>
      <link rel="stylesheet" href="style.css" />
     <script src="app.js"></script>
   </head>
 
   <body ng-controller="MainCtrl">
     <div class="container">
-      <div class="row">
-        
-        <div id="mealDetails" class="col-md-4 col-md-offset-1">
-        <h3>Enter the Meal Details</h3>
-        
-        <table class="table">
-          <tr><td>Base Meal Price:  $</td><td><input ng-model="mealPrice"></td></tr>
-          <tr><td>Tax Rate: %</td><td><input ng-model="taxRate"></td></tr>
-          <tr><td>Tip %</td><td><input ng-model="tipPercent"></td></tr>
-          
-        </table>
-        <div id="errLabel"><p>{{errMessage}}</p></div>
-        <button ng-click="submitForm()">Submit</button>
-        <button ng-click="clearMeal()">Clear</button>
-        </div>
-        <div  id="custCharge" class="col-md-4 col-md-offset-1">
-        <h3>Customer Charges</h3>
-        <table class="table">
-          <tr><td>Subtotal:</td><td>{{subtotal | currency}}</td></tr>
-          <tr><td>Tip:</td><td>{{tipCash | currency}}</td></tr>
-          <tr><th>Total:</th><th>{{totalBill | currency}}</th></tr>
-        </table>
-        
-        </div>
-        <div class="col-md-4 col-md-offset-1">
-          <h3>My Earnings Info</h3>
-          
-           <table class="table">
-          <tr><td>Tip Total:</td><td>{{tipTotal | currency}}</td></tr>
-          <tr><td>Meal Count:</td><td>{{mealCount}}</td></tr>
-          <tr><td>Average Tip Per Meal:</td><td>{{avgTip | currency}}</td></tr>
-        </table>
-        </div>
-        
+      <div class="container-fluid">
+
+      <ul id="navBar" class="nav navbar-nav">
+          <li><a href="#/">Home</a></li>
+          <li><a href="#/newMeal">New Meal</a></li>
+          <li><a href="#/myEarnings">My Earnings</a></li>
+      </ul>
       </div>
-      <div class="row">
-        <div class="col-md-1 col-md-offset-9"></div>
-        <button ng-click="clearAll()">Clear</button>
-      </div>
+      <div class="row" ng-view>
+        
+
+
     
     </div>
+      </div>
   </body>
 
 </html>

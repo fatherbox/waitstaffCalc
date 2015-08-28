@@ -1,0 +1,21 @@
+
+<div class="container">
+    <div class="row">
+<div class="col-md-4">
+    <h3>My Earnings Info</h3>
+
+    <table class="table">
+        <tr><td>Tip Total:</td><td>{{values.tipTotal | currency}}</td></tr>
+        <tr><td>Meal Count:</td><td>{{values.mealCount}}</td></tr>
+        <tr><td>Average Tip Per Meal:</td><td>{{values.avgTip | currency}}</td></tr>
+    </table>
+
+
+</div>
+</div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1">
+        <button class="clearBtn" ng-click="clearAll()">Reset</button>
+        </div>
+    </div>
+    </div>

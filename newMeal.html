@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+
+    <div id="mealDetails" class="col-md-4">
+    <h3>Enter the Meal Details</h3>
+
+    <table class="table">
+        <tr><td>Base Meal Price:  $</td><td><input ng-model="values.mealPrice"></td></tr>
+        <tr><td>Tax Rate: %</td><td><input ng-model="values.taxRate"></td></tr>
+        <tr><td>Tip %</td><td><input ng-model="values.tipPercent"></td></tr>
+
+    </table>
+    <div id="errLabel"><p>{{values.errMessage}}</p></div>
+    <button ng-click="submitForm()">Submit</button>
+    <button ng-click="clearMeal()">Clear</button>
+</div>
+</div>
+<div class="row">
+<div  id="custCharge" class="col-md-4 clearfix">
+    <h3>Customer Charges</h3>
+    <table class="table">
+        <tr><td>Subtotal:</td><td>{{values.subtotal | currency}}</td></tr>
+        <tr><td>Tip:</td><td>{{values.tipCash | currency}}</td></tr>
+        <tr><th>Total:</th><th>{{values.totalBill | currency}}</th></tr>
+    </table>
+
+</div>
+</div>
+</div>
