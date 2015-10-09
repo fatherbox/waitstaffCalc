@@ -1,4 +1,4 @@
-var app = angular.module('plunker', ['ngRoute']);
+var app = angular.module('plunker', ['ngRoute', 'ngAnimate']);
 app.constant('VERSION', 1.1);
 app.config(['$routeProvider', function ($routeProvider)
 {
